@@ -1,7 +1,10 @@
 # A-3D-multimodal-rigid-coarse-registration-based-on-2D-registration
 A 3D multimodal rigid coarse registration based on 2D registration
 
+The code is not very well written and it is recommended to optimize it yourself
 
 In medical image registration, multimodal registration is a relatively complex problem. Because the grayscale distribution of the two images is completely different, in the registration, simply relying on the center of gravity alignment and then performing rough registration is computationally intensive and slow. Considering that the rotation angle of the human body in most images is mostly small, the human body in the two images is mainly registered by translation. The two images are accumulated along the x-axis to obtain the projection of the image on the YZ plane, and the 2D projection on the YZ plane can still maintain the relative position relationship of the 3D human body in the space in the Y and Z directions. By aligning the two 2D projections, the rough registration result of the 3D registration in the YZ direction can be obtained. By accumulating the 3D images along the X, Y, and Z axes, adding the loss functions of the three 2D registrations, and maximizing the mutual information, the rough registration result of the 3D registration can be obtained. Through dozens of CT-MRI registration experiments, we found that this method is very fast and effective.
 
 For situations where there is a large angle of rotation. In case of unimodal images, the rotation angle can be aligned using the Fourier spectrum of the image first, and then the translation alignment can be performed based on this method. The Fourier spectrum of a multimodal image cannot be used for rotational alignment.
+
+In addition, the method can be further accelerated, e.g., by decomposing the resulting 2D image alignment into a problem of sliding alignment of an array along two coordinate axes. But more information is lost and 2D is already fast enough 
